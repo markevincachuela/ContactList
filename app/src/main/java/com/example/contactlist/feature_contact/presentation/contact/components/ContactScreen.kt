@@ -1,4 +1,4 @@
-package com.example.contactlist.presentation.contact.components
+package com.example.contactlist.feature_contact.presentation.contact.components
 
 import android.annotation.SuppressLint
 import android.util.Log
@@ -22,9 +22,9 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import com.example.contactlist.domain.model.Contact
-import com.example.contactlist.presentation.contact.ContactState
-import com.example.contactlist.presentation.searchbar.components.SearchBarScreen
+import com.example.contactlist.feature_contact.domain.model.Contact
+import com.example.contactlist.feature_contact.presentation.contact.ContactState
+import com.example.contactlist.feature_contact.presentation.searchbar.components.SearchBarScreen
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
@@ -65,12 +65,22 @@ fun ContractScreen(
 
             Divider(color = Color.Black)
 
+            Spacer(modifier = Modifier
+                .height(30.dp)
+            )
+
             LazyColumn(
                 modifier = Modifier
                     .fillMaxSize()
             ) {
                 items(test) {
-                    Log.d("KEEEVS","teeest === $test")
+                    ContactItem(
+                        contact = it,
+                        modifier = Modifier,
+                        onClickDelete = {
+
+                        }
+                    )
                 }
 
             }
