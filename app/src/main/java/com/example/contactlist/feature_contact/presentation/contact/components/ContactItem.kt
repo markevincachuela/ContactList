@@ -45,7 +45,7 @@ fun ContactItem(
                     .size(65.dp)
                     .clip(CircleShape)
                     .border(2.dp, Color.Gray, CircleShape),
-                painter = painterResource(id = R.drawable.ic_launcher_background),
+                painter = painterResource(id = contact.image),
                 contentDescription = "Display picture",
                 contentScale = ContentScale.Crop
             )
@@ -59,7 +59,7 @@ fun ContactItem(
 
             ) {
                 Text(
-                    text = "Name",
+                    text = contact.name,
                     overflow = TextOverflow.Ellipsis
 
                 )
@@ -68,7 +68,7 @@ fun ContactItem(
                         .height(5.dp)
                 )
                 Text(
-                    text = "content",
+                    text = contact.content,
                     overflow = TextOverflow.Ellipsis
                 )
             }

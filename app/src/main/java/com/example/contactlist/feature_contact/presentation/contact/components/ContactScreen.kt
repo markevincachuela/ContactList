@@ -18,25 +18,47 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
+import com.example.contactlist.R
 import com.example.contactlist.feature_contact.domain.model.Contact
+import com.example.contactlist.feature_contact.domain.use_case.ContactUseCases
+import com.example.contactlist.feature_contact.presentation.add_edit_contact.AddEditContactViewModel
 import com.example.contactlist.feature_contact.presentation.contact.ContactState
+import com.example.contactlist.feature_contact.presentation.contact.ContactViewModel
 import com.example.contactlist.feature_contact.presentation.searchbar.components.SearchBarScreen
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun ContractScreen(
-
+    viewmodel: ContactViewModel = hiltViewModel()
 ) {
     val scaffoldState = remember { SnackbarHostState() }
 
-    val test: MutableList<Contact> = mutableListOf(
-        Contact(1,"Kevs","test",2,4343),
-        Contact(2,"Kevin","test1",3,123123),
+    val state = viewmodel.state.value
+
+    val viewModels: AddEditContactViewModel = hiltViewModel()
+
+
+
+//    val test: MutableList<Contact> = mutableListOf(
+//        Contact(1,"Kevs","test",2,4343),
+//        Contact(2,"Kevin","test1",3,123123)
+//        )
+
+    LaunchedEffect(Unit) {
+        viewModels.insertContact(
+            contact = Contact(
+                name ="Kevs",
+                content = "test",
+                image = R.drawable.ic_launcher_background,
+                timestamp = System.currentTimeMillis())
         )
+    }
 
     Scaffold(
        floatingActionButton = {
@@ -73,9 +95,9 @@ fun ContractScreen(
                 modifier = Modifier
                     .fillMaxSize()
             ) {
-                items(test) {
+                items(state.contacts) { contact ->
                     ContactItem(
-                        contact = it,
+                        contact = contact,
                         modifier = Modifier,
                         onClickDelete = {
 
