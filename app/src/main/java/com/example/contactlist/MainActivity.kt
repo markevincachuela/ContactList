@@ -17,7 +17,9 @@ import androidx.compose.ui.unit.dp
 import com.example.contactlist.feature_contact.presentation.contact.components.ContractScreen
 import com.example.contactlist.feature_contact.presentation.searchbar.components.SearchBarScreen
 import com.example.contactlist.ui.theme.ContactListTheme
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
