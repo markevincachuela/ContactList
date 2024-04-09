@@ -1,4 +1,4 @@
-package com.example.contactlist.presentation.searchbar.components
+package com.example.contactlist.feature_contact.presentation.searchbar.components
 
 import android.text.Layout.Alignment
 import androidx.compose.foundation.layout.Arrangement
