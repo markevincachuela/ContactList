@@ -22,7 +22,8 @@ class ContactViewModel @Inject constructor (
     init {
         getContact()
     }
-    fun getContact() {
+
+    private fun getContact() {
         contactUseCases.getContactsUseCase()
             .onEach {contacts ->
                 _state.value = state.value.copy(
