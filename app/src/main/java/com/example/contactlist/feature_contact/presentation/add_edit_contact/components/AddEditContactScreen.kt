@@ -22,6 +22,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.AccountBox
 import androidx.compose.material.icons.outlined.DriveFileRenameOutline
 import androidx.compose.material.icons.outlined.Phone
+import androidx.compose.material3.Button
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
@@ -40,15 +41,20 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
 import com.example.contactlist.R
+import com.example.contactlist.di.AnimatedUtils
+import com.example.contactlist.feature_contact.domain.model.Contact
+import com.example.contactlist.feature_contact.presentation.add_edit_contact.AddEditContactViewModel
 import com.example.contactlist.ui.theme.PurpleGrey80
 
 
 @Composable
 fun BoxScope.AddEditContactScreen(
-    isVisible: Boolean
+    animatedUtils: AnimatedUtils,
+    viewModel : AddEditContactViewModel
 ) {
     val duration = 1000
     val intOffsetTweenSpec: TweenSpec<IntOffset> = tween(durationMillis = duration)
+
 
 
     val density = LocalDensity.current
@@ -64,7 +70,7 @@ fun BoxScope.AddEditContactScreen(
         mutableStateOf("")
     }
     AnimatedVisibility(
-        visible = isVisible,
+        visible = animatedUtils.isAnimated.value,
         enter = slideInVertically(
             initialOffsetY = { with(density) { 350.dp.roundToPx() } },
             animationSpec = intOffsetTweenSpec,
@@ -74,6 +80,7 @@ fun BoxScope.AddEditContactScreen(
         ),
         modifier = Modifier
             .align(Alignment.BottomCenter)
+            .padding(5.dp)
             .padding(bottom = 100.dp)
             .height(250.dp)
 
@@ -146,10 +153,29 @@ fun BoxScope.AddEditContactScreen(
                             )
                         }
                     )
+
+                    Button(
+                        onClick = {
+                            animatedUtils.isAnimated.value = false
+                            viewModel.insertContact(
+                                contact = Contact(
+                                    name = filledName,
+                                    content = filledContent,
+                                    image = R.drawable.ic_launcher_background,
+                                    mobileNumber = filledMobileNumber,
+                                    timestamp = System.currentTimeMillis())
+                            )
+
+                        }
+                    ) {
+                        Text(text = "Save")
+                    }
                 }
             }
         }
     }
+}
 
+fun clearInputField() {
 
 }

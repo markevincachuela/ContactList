@@ -27,6 +27,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.contactlist.R
+import com.example.contactlist.di.AnimatedUtils
 import com.example.contactlist.feature_contact.domain.model.Contact
 import com.example.contactlist.feature_contact.presentation.add_edit_contact.AddEditContactViewModel
 import com.example.contactlist.feature_contact.presentation.add_edit_contact.components.AddEditContactScreen
@@ -44,23 +45,13 @@ fun ContractScreen(
 
     val viewModels: AddEditContactViewModel = hiltViewModel()
 
-    val isVisible = remember { mutableStateOf(false) }
-
-//    LaunchedEffect(Unit) {
-//        viewModels.insertContact(
-//            contact = Contact(
-//                name ="Kevs",
-//                content = "test",
-//                image = R.drawable.ic_launcher_background,
-//                timestamp = System.currentTimeMillis())
-//        )
-//    }
+    val animatedUtils = AnimatedUtils
 
     Scaffold(
        floatingActionButton = {
            FloatingActionButton(onClick = {
                //Todo click for creating new contract
-               isVisible.value = !isVisible.value
+               animatedUtils.isAnimated.value = !animatedUtils.isAnimated.value
            }) {
                Icon(
                    imageVector = Icons.Default.Add,
@@ -104,7 +95,10 @@ fun ContractScreen(
                     }
                 }
             }
-            AddEditContactScreen(isVisible = isVisible.value)
+            AddEditContactScreen(
+                animatedUtils = animatedUtils,
+                viewModel = viewModels
+            )
         }
 
 
