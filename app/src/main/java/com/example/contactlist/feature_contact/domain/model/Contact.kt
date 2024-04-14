@@ -10,7 +10,8 @@ data class Contact(
     val name: String,
     val content: String,
     @DrawableRes val image: Int,
-    val timestamp: Long
+    val mobileNumber: String,
+    val timestamp: Long,
 )
 
 
