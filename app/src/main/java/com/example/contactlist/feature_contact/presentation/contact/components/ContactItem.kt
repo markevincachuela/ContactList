@@ -44,7 +44,8 @@ fun ContactItem(
                 modifier = Modifier
                     .size(65.dp)
                     .clip(CircleShape)
-                    .border(2.dp, Color.Gray, CircleShape),
+                    .border(2.dp, Color.Gray, CircleShape)
+                    .align(Alignment.CenterVertically),
                 painter = painterResource(id = contact.image),
                 contentDescription = "Display picture",
                 contentScale = ContentScale.Crop
@@ -59,16 +60,19 @@ fun ContactItem(
 
             ) {
                 Text(
-                    text = contact.name,
+                    text = contact.id.toString()
+                )
+                Text(
+                    text = "name: ${contact.name}",
                     overflow = TextOverflow.Ellipsis
 
                 )
-                Spacer(
-                    modifier = modifier
-                        .height(5.dp)
+                Text(
+                    text = "description: ${contact.content}",
+                    overflow = TextOverflow.Ellipsis
                 )
                 Text(
-                    text = contact.content,
+                    text = "mobile number: ${contact.mobileNumber}",
                     overflow = TextOverflow.Ellipsis
                 )
             }
