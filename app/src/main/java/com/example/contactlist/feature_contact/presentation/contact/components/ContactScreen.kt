@@ -1,6 +1,7 @@
 package com.example.contactlist.feature_contact.presentation.contact.components
 
 import android.annotation.SuppressLint
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -50,7 +51,6 @@ fun ContractScreen(
     Scaffold(
        floatingActionButton = {
            FloatingActionButton(onClick = {
-               //Todo click for creating new contract
                animatedUtils.isAnimated.value = !animatedUtils.isAnimated.value
            }) {
                Icon(
@@ -62,7 +62,13 @@ fun ContractScreen(
         snackbarHost = { SnackbarHost(hostState = scaffoldState) }
     ) {
 
-        Box{
+        Box(
+            modifier = Modifier.clickable {
+                if (animatedUtils.isAnimated.value) {
+                    animatedUtils.isAnimated.value = false
+                }
+            }
+        ){
             Column(
                 modifier = Modifier
                     .fillMaxSize()
