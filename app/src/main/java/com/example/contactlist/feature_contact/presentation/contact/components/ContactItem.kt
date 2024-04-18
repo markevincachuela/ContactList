@@ -25,8 +25,7 @@ import com.example.contactlist.feature_contact.domain.model.Contact
 @Composable
 fun ContactItem(
     contact: Contact,
-    modifier: Modifier = Modifier,
-    onClickDelete: () -> Unit
+    modifier: Modifier = Modifier
 ) {
 
     Box(
